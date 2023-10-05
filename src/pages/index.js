@@ -1,10 +1,12 @@
 import Image from "next/image";
 import favicon from "../../public/favicon.ico";
 import { useState } from "react";
+import styles from "./index.module.css";
 
 export default function Home() {
   const [count, setCount] = useState(0);
   const [animalInput, setAnimalInput] = useState("");
+  const [result, setResult] = useState([]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -41,13 +43,10 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <main
-        className={`flex min-h-screen flex-col items-center justify-between dark:bg-black p-24`}
-      >
-        <Image src={favicon} alt="favicon" className="w-30 h-30" />
+    <div className={styles.body}>
+      <main className={styles.main}>
+        <Image src={favicon} alt="favicon" className={styles.icon} />
         <h3 className="text-[green]">Name my pet</h3>
-        <p>You&apos;ve used this app {count} times</p>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -58,6 +57,7 @@ export default function Home() {
           />
           <input type="submit" value="Generate names" />
         </form>
+        <div className={styles.result}>{result}</div>
       </main>
     </div>
   );
